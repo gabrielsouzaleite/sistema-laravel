@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class LoginController extends Controller
@@ -13,20 +15,20 @@ class LoginController extends Controller
         return view('login.index');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         // dd($request->all());
         if (!Auth::attempt($request->only(['login', 'password']))) {
             return redirect()->back()->withErrors(['Usuário ou senha inválidos']);
         }
 
-        return to_route('home.index');
+        return Redirect::route('home.index');
     }
 
-    public function destroy()
+    public function destroy(): RedirectResponse
     {
         Auth::logout();
 
-        return to_route('login');
+        return Redirect::route('login');
     }
 }

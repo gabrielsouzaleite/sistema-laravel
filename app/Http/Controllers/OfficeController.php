@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Office;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class OfficeController extends Controller
@@ -25,13 +27,13 @@ class OfficeController extends Controller
         );
     }
 
-    public function store(Request $request, Office $office)
+    public function store(Request $request, Office $office): RedirectResponse
     {
         $data = $request->all();
 
         $office->create($data);
 
-        return redirect()->route('offices.index');
+        return Redirect::route('offices.index');
     }
 
     public function edit(Office $office): View
@@ -39,18 +41,18 @@ class OfficeController extends Controller
         return view('offices.edit')->with('office', $office);
     }
 
-    public function update(Office $office, Request $request)
+    public function update(Office $office, Request $request): RedirectResponse
     {
         $office->fill($request->all());
         $office->save();
 
-        return to_route('offices.index');
+        return Redirect::route('offices.index');
     }
 
-    public function destroy(Office $office)
+    public function destroy(Office $office): RedirectResponse
     {
         $office->delete();
 
-        return to_route('offices.index');
+        return Redirect::route('offices.index');
     }
 }
