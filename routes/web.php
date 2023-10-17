@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{DepartmentController, HomeController, LoginController, OfficeController, UserController};
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/home', [HomeController::class, 'index'])->name('home.index');
-Route::resource('/departments', DepartmentController::class)->except(['show']);
-Route::resource('/offices', OfficeController::class)->except(['show']);
-Route::resource('/users', UserController::class)->except(['show']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
