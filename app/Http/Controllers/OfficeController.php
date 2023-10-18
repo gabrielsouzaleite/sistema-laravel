@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OfficeFormRequest;
 use App\Models\Office;
+use App\Repositories\OfficeRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -11,6 +12,9 @@ use Illuminate\View\View;
 
 class OfficeController extends Controller
 {
+    public function __construct(private OfficeRepository $repository)
+    {
+    }
     public function index(Request $request): View
     {
         $offices = Office::query()->orderBy('job_name')->get();
@@ -32,8 +36,7 @@ class OfficeController extends Controller
 
     public function store(OfficeFormRequest $request): RedirectResponse
     {
-        $data = $request->all();
-        $office = Office::create($data);
+        $office = $this->repository->add($request);
 
         return Redirect::route('offices.index')->with(
             'mensagem.sucesso',

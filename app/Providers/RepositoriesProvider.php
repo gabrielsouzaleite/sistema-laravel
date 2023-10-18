@@ -2,13 +2,17 @@
 
 namespace App\Providers;
 
-use App\Repositories\DepartmentRepository;
-use App\Repositories\EloquentDepartmentRepository;
+use App\Repositories\{DepartmentRepository,
+    EloquentDepartmentRepository,
+    EloquentOfficeRepository,
+    OfficeRepository
+};
 use Illuminate\Support\ServiceProvider;
 
 class RepositoriesProvider extends ServiceProvider
 {
     public array $bindings = [
-    DepartmentRepository::class => EloquentDepartmentRepository::class
+    DepartmentRepository::class => EloquentDepartmentRepository::class,
+    OfficeRepository::class => EloquentOfficeRepository::class,
     ];
 }
