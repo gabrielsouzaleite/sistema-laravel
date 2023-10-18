@@ -18,11 +18,11 @@
         />
     </div>
     <div class="mb-3">
-        <label for="login" class="form-label"> E-mail de Login </label>
+        <label for="email" class="form-label"> E-mail de Login </label>
         <input
             type="email"
-            name="login"
-            id="login"
+            name="email"
+            id="email"
             class="form-control"
             required
         />

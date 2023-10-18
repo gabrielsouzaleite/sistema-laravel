@@ -11,6 +11,8 @@ export default defineConfig({
                 "resources/css/signin.css",
                 "resources/css/alerts.css",
                 "resources/js/app.js",
+                "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+                "node_modules/bootstrap/dist/js/bootstrap.js",
             ],
             refresh: true,
         }),

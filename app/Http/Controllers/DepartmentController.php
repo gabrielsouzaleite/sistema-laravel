@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DepartmentFormRequest;
 use App\Models\Department;
+use App\Repositories\DepartmentRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -11,6 +12,10 @@ use Illuminate\View\View;
 
 class DepartmentController extends Controller
 {
+    public function __construct(private DepartmentRepository $repository)
+    {
+    }
+
     public function index(Request $request): View
     {
         $departments = Department::query()->orderBy('department_name')->get();
@@ -32,8 +37,7 @@ class DepartmentController extends Controller
 
     public function store(DepartmentFormRequest $request): RedirectResponse
     {
-        $data = $request->all();
-        $department = Department::create($data);
+        $department = $this->repository->add($request);
 
         return Redirect::route('departments.index')->with(
             'mensagem.sucesso',

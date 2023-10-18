@@ -20,10 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/departments', DepartmentController::class);
-Route::resource('/offices', OfficeController::class);
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title')</title>
+    <title>{{ $title }}</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script
+            type="text/javascript"
+            src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152197/smartwizard/jquery.smartWizard.min.js"
+        ></script>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js', "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "node_modules/bootstrap/dist/js/bootstrap.js",])
 </head>
 <body>
-    @include('components.menu')
+    <x-menu />
     <div class="container-fluid">
         <div class="main-panel">
             <div class="row justify-content-center">
@@ -34,7 +39,7 @@
                     <div class="col"></div>
 
                     <div class="col text-center">
-                        <h2>@yield('title')</h2>
+                        <h2>{{ $title }}</h2>
                     </div>
 
                     <div class="col"></div>
@@ -47,13 +52,11 @@
                     </div>
                 @endif
 
-                	@yield('content')
-
-
+                	{{ $slot }}
 
             </main>
 
-            @include('components.footer')
+            <x-footer />
         </div>
     </div>
 </body>

@@ -1,5 +1,4 @@
-@extends('components.layout')
-@section('title', 'Home')
-@section('content')
+<x-layout title="Home">
     <h1>Olá mundo</h1>
-@endsection
+</x-layout>
+

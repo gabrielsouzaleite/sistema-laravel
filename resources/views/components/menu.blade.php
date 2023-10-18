@@ -28,7 +28,7 @@
         <div class="container">
             <h1 class="navbar-brand">
                 <a href="{{ url('/home') }}">
-                    <img class="logo" style="margin: 10px 0" src="{{ asset('http://localhost/resources/img/Logo.png') }}" alt="Logo da Forma" />
+                    <img class="logo" style="margin: 10px 0" src="{{ asset('http://192.168.2.49/intranet/assets/images/Logo.png') }}" alt="Logo da Forma" />
                 </a>
             </h1>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"

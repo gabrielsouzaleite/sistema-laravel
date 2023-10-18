@@ -17,7 +17,6 @@ class OfficeController extends Controller
 
         $mensagemSucesso = $request->session()->get('mensagem.sucesso');
 
-
         return View(
             'offices.index',
             compact('offices')
@@ -55,8 +54,7 @@ class OfficeController extends Controller
         return Redirect::route('offices.index')->with(
             'mensagem.sucesso',
             "Cargo '{$office->job_name}' atualizado com sucesso"
-        )
-        ;
+        );
     }
 
     public function destroy(Office $office): RedirectResponse
