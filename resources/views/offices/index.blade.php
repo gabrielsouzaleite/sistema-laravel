@@ -7,6 +7,16 @@
     <div class="col-md-3">
         <a class="btn btn-primary" href="{{ route('offices.create') }}">Criar</a>
     </div>
+
+    @isset($mensagemSucesso)
+    <div class="col-md-6">
+        <div class="alert alert-success">
+            {{ $mensagemSucesso }}
+        </div>
+    </div>
+    @endisset
+
+    <div class="col-md-3"></div>
 </div>
 <br />
 <div class="row justify-content-center">
