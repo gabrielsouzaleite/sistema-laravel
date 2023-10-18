@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DocumentTypeFormRequest;
 use App\Models\DocumentType;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -21,6 +23,17 @@ class DocumentTypeController extends Controller
     {
         return View(
             'document-types.create'
+        );
+    }
+
+
+    public function store(DocumentTypeFormRequest $request): RedirectResponse
+    {
+        $documentType = $this->repository->add($request);
+
+        return Redirect::route('departments.index')->with(
+            'mensagem.sucesso',
+            "Departamento '{$documentType->type}' adicionado com sucesso"
         );
     }
 }
