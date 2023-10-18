@@ -1,36 +1,31 @@
-<x-layout title="Cargos">
-
-<div class="row">
+<x-layout title="Tipos de documentos">
+    <div class="row">
     <div class="col-md-3">
-        <a class="btn btn-primary" href="{{ route('offices.create') }}">Criar</a>
+        <a class="btn btn-primary" href="{{ route('document-types.create') }}">Criar</a>
     </div>
-
     @isset($mensagemSucesso)
-    <div class="col-md-6">
-        <div class="alert alert-success">
-            {{ $mensagemSucesso }}
-        </div>
-    </div>
+
+    <x-mensagem-sucesso mensagemSucesso="{{ $mensagemSucesso }}" />
     @endisset
 
-    <div class="col-md-3"></div>
+    <div class="col-md-3">
+    </div>
 </div>
-<br />
 <div class="row justify-content-center">
     <div class="col-md-6">
         <ul class="list-group">
-            @foreach ($offices as $office)
+            @foreach ($documentTypes as $documentType)
 
             <li class="list-group-item d-flex justify-content-between">
             <div class="row">
                 <p>
-                    <strong> {{ $office->job_name }} </strong>
+                    <strong> {{ $documentType->type }} </strong>
                 </p>
                 <span class="d-flex gap-2">
-                    <a href="{{ route('offices.edit', $office->id) }}" class="btn btn-info btn-sm">
+                    <a href="{{ route('document-types.edit', $documentType->id) }}" class="btn btn-info btn-sm">
                         Alterar
                     </a>
-                    <form action="{{ route('offices.destroy', $office->id) }}" method="post">
+                    <form action="{{ route('document-types.destroy', $documentType->id) }}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger btn-sm" type="submit"

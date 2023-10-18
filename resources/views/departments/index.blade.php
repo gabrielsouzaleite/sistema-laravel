@@ -1,19 +1,13 @@
-@extends('components.layout')
-@section('title', 'Departamentos')
-@section('content')
+<x-layout title="Departamentos">
 <div class="row">
     <div class="col-md-3">
         <a class="btn btn-primary" href="{{ route('departments.create') }}">Criar</a>
     </div>
 
-    @isset($mensagemSucesso)
-    <div class="col-md-6">
-        <div class="alert alert-success">
-            {{ $mensagemSucesso }}
-        </div>
-    </div>
-    @endisset
+@isset($mensagemSucesso)
 
+    <x-mensagem-sucesso mensagemSucesso="{{ $mensagemSucesso }}" />
+    @endisset
     <div class="col-md-3">
     </div>
 </div>
@@ -47,4 +41,4 @@
 </ul>
     </div>
 </div>
-@endsection
+</x-layout>
