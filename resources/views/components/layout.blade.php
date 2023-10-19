@@ -10,6 +10,10 @@
             type="text/javascript"
             src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152197/smartwizard/jquery.smartWizard.min.js"
         ></script>
+    <script>
+        import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
+    </script>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js', "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "node_modules/bootstrap/dist/js/bootstrap.js",])
 </head>

@@ -15,8 +15,7 @@ class EloquentOfficeRepository implements OfficeRepository
             $data = $request->all();
             $office = Office::create($data);
 
-            return $office
-            ;
+            return $office;
         });
     }
 }

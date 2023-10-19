@@ -57,7 +57,7 @@ class UserController extends Controller
 
         return view(
             'users.edit',
-            compact('offices', 'departments')
+            compact('departments')
         )->with('user', $user);
     }
 }

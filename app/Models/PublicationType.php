@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PublicationType extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'type'
+    ];
 }
