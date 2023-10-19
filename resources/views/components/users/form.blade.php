@@ -1,3 +1,4 @@
+@props(['departments', 'offices', 'action', 'update', 'user'])
 <form action="{{ $action }}" method="post">
     @csrf
     @if ($update)
@@ -10,8 +11,8 @@
             name="user_name"
             id="user_name"
             class="form-control"
-            @isset($id)
-            value="{{ $userName }}"
+            @isset($user->id)
+            value="{{ $user->user_name }}"
             @endisset
             required
         />
@@ -20,11 +21,11 @@
         <label for="login" class="form-label"> E-mail de Login </label>
         <input
             type="email"
-            name="login"
-            id="login"
+            name="email"
+            id="email"
             class="form-control"
-            @isset($id)
-            value="{{ $email }}"
+            @isset($user->id)
+            value="{{ $user->email }}"
             @endisset
             required
         />
@@ -58,8 +59,8 @@
                 name="birth_date"
                 id="birth_date"
                 class="form-control"
-                @isset($id)
-                    value="{{ $birthDate }}"
+                @isset($user->id)
+                    value="{{ $user->birth_date }}"
                 @endisset
                 required
             />
@@ -83,8 +84,8 @@
                 Status do usuario
             </label>
             <select name="user_status" id="user_status" class="form-select">
-                @isset($id)
-                    <option value="{{ $userStatus }}"> {{ $statusName }} </option>
+                @isset($user->id)
+                    <option value="{{ $user->user_status }}"> {{ $user->user_name }} </option>
                 @endisset
                 <option value="0">Não definido</option>
                 <option value="1">Ativo</option>
@@ -95,8 +96,8 @@
         <div class="col-md-6">
             <label for="user_level" class="form-label"> Nivel do usuario </label>
             <select name="user_level" id="user_level" class="form-select">
-                @isset($id)
-                    <option value="{{ $userLevel }}"> {{ $levelName }} </option>
+                @isset($user->id)
+                    <option value="{{ $user->user_level }}"> {{ $user->user_name }} </option>
                 @endisset
                 <option value="0">Não definido</option>
                 <option value="1">Padrão</option>
@@ -108,8 +109,8 @@
         <div class="col-md-6">
             <label for="department_id" class="form-label"> Departamento </label>
             <select name="department_id" id="department_id" class="form-select">
-                @isset($id)
-                    <option value="{{ $userDepartment }}"> {{ $departmentName }} </option>
+                @isset($user->id)
+                    <option value="{{ $user->department_id }}"> {{ $user->department->department_name }} </option>
                 @endisset
                 {{-- {{ $departments = Department::query()->orderBy('department_name')->get() }} --}}
                 @fragment('department-list')
@@ -122,14 +123,12 @@
         <div class="col-md-6">
             <label for="office_id" class="form-label"> Cargo </label>
             <select name="office_id" id="office_id" class="form-select">
-                @isset($id)
-                    <option value="{{ $user_office }}"> {{ $office_name }} </option>
+                @isset($user->id)
+                    <option value="{{ $user->office_id }}"> {{ $user->office->job_name }} </option>
                 @endisset
-                @fragment('office-list')
                     @foreach ($offices as $office)
                     <option value="{{ $office->id }}">{{ $office->job_name}}</option>
                     @endforeach
-                @endfragment
             </select>
         </div>
     </div>

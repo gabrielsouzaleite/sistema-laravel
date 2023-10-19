@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('user_name', 225);
-            $table->unsignedTinyInteger('user_status');
-            $table->unsignedTinyInteger('user_level');
+            $table->foreignId('status_id')->constrained();
+            $table->foreignId('user_level')->constrained();
             $table->date('birth_date');
             $table->foreignId('department_id')->constrained();
             $table->foreignId('office_id')->constrained();

@@ -14,12 +14,22 @@ class User extends Authenticatable
         'email',
         'password',
         'user_name',
-        'user_status',
-        'user_level',
+        'status_id',
+        'level_id',
         'birth_date',
         'department_id',
         'office_id'
     ];
+
+    public function status()
+    {
+        return $this->hasOne(UserStatus::class, 'id', 'status_id');
+    }
+
+    public function level()
+    {
+        return $this->hasOne(UserLevel::class, 'id', 'level_id');
+    }
 
     public function department()
     {
