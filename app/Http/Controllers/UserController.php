@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\Office;
+use App\Models\Status;
 use App\Models\User;
+use App\Models\UserLevel;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -27,11 +29,15 @@ class UserController extends Controller
 
     public function create(Department $department, Office $office): View
     {
-        $departments = $department->all();
-        $offices = $office->all();
+
+        $offices = Office::query()->orderBy('job_name')->get();
+        $departments = Department::query()->orderBy('department_name')->get();
+        $allStatus = Status::query()->orderBy('status_name')->get();
+        $levels = UserLevel::query()->orderBy('level_name')->get();
+
         return View(
             'users.create',
-            compact('departments', 'offices')
+            compact('departments', 'offices', 'allStatus', 'levels')
         );
     }
 
@@ -54,10 +60,12 @@ class UserController extends Controller
     {
         $offices = Office::query()->orderBy('job_name')->get();
         $departments = Department::query()->orderBy('department_name')->get();
+        $allStatus = Status::query()->orderBy('status_name')->get();
+        $levels = UserLevel::query()->orderBy('level_name')->get();
 
         return view(
             'users.edit',
-            compact('departments', 'offices')
+            compact('departments', 'offices', 'allStatus', 'levels')
         )->with('user', $user);
     }
 }

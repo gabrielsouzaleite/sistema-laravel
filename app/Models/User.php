@@ -15,7 +15,7 @@ class User extends Authenticatable
         'password',
         'user_name',
         'status_id',
-        'level_id',
+        'user_level',
         'birth_date',
         'department_id',
         'office_id'
@@ -23,12 +23,12 @@ class User extends Authenticatable
 
     public function status()
     {
-        return $this->hasOne(UserStatus::class, 'id', 'status_id');
+        return $this->hasOne(Status::class, 'id', 'status_id');
     }
 
     public function level()
     {
-        return $this->hasOne(UserLevel::class, 'id', 'level_id');
+        return $this->hasOne(UserLevel::class, 'id', 'user_level');
     }
 
     public function department()

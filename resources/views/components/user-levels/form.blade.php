@@ -6,16 +6,16 @@
     @endif
 
     <div class="mb-3" >
-        <label for="status_name" class="form-label">
+        <label for="level_name" class="form-label">
             Nome do Status
         </label >
         <input
             type="text"
-            name="status_name"
-            id="status_name"
+            name="level_name"
+            id="level_name"
             class="form-control"
-            @isset($statusName)
-            value="{{ $statusName }}"
+            @isset($levelName)
+            value="{{ $levelName }}"
             @endisset
     />
     </div>

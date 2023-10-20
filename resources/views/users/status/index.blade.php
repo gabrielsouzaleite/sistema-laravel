@@ -1,7 +1,7 @@
 <x-layout title="Status">
     <div class="row">
         <div class="col-md-3">
-            <a class="btn btn-primary" href="{{ route('users-status.create') }}">Criar</a>
+            <a class="btn btn-primary" href="{{ route('status.create') }}">Criar</a>
         </div>
 
         @isset($mensagemSucesso)
@@ -23,10 +23,10 @@
                             <strong> {{ $status->status_name }} </strong>
                         </p>
                         <span class="d-flex gap-2">
-                            <a href="{{ route('user-status.edit', $status->id) }}" class="btn btn-info btn-sm">
+                            <a href="{{ route('status.edit', $status->id) }}" class="btn btn-info btn-sm">
                                 Alterar
                             </a>
-                            <form action="{{ route('user-status.destroy', $status->id) }}" method="post">
+                            <form action="{{ route('status.destroy', $status->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm" type="submit"

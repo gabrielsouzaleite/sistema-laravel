@@ -14,9 +14,9 @@ use App\Http\Controllers\DocumentTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\PublicationTypeController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserLevelsController;
-use App\Http\Controllers\UserStatusController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -66,8 +66,8 @@ Route::middleware('auth')->group(function () {
                 ->name('logout');
 });
             Route::get('/home', [HomeController::class, 'index'])->name('home.index');
-            Route::resource('/users-status', UserStatusController::class);
-            Route::resource('/user-levels', UserLevelsController::class);
+            Route::resource('/users/status', StatusController::class);
+            Route::resource('/users/levels', UserLevelsController::class);
             Route::resource('/users', UserController::class);
             Route::resource('/departments', DepartmentController::class);
             Route::resource('/offices', OfficeController::class);

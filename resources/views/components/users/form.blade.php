@@ -1,4 +1,4 @@
-@props(['departments', 'offices', 'action', 'update', 'user'])
+@props(['departments', 'offices', 'action', 'update', 'user', 'allStatus', 'levels'])
 <form action="{{ $action }}" method="post">
     @csrf
     @if ($update)
@@ -80,28 +80,27 @@
     </div>
     <div class="row mb-3">
         <div class="col-md-6">
-            <label for="user_status" class="form-label">
+            <label for="status_id" class="form-label">
                 Status do usuario
             </label>
-            <select name="user_status" id="user_status" class="form-select">
+            <select name="status_id" id="status_id" class="form-select">
                 @isset($user->id)
-                    <option value="{{ $user->user_status }}"> {{ $user->user_name }} </option>
+                    <option value="{{ $user->user_status }}"> {{ $user->status->status_name }} </option>
                 @endisset
-                <option value="0">Não definido</option>
-                <option value="1">Ativo</option>
-                <option value="2">Invativo</option>
-                <option value="3">Licença</option>
+                @foreach ($allStatus as $status)
+                    <option value="{{ $status->id }}"> {{ $status->status_name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="col-md-6">
             <label for="user_level" class="form-label"> Nivel do usuario </label>
             <select name="user_level" id="user_level" class="form-select">
                 @isset($user->id)
-                    <option value="{{ $user->user_level }}"> {{ $user->user_name }} </option>
+                    <option value="{{ $user->user_level }}"> {{ $user->level->level_name }} </option>
                 @endisset
-                <option value="0">Não definido</option>
-                <option value="1">Padrão</option>
-                <option value="2">Administrador</option>
+                @foreach ($levels as $level)
+                    <option value="{{ $level->id }}">{{ $level->level_name }}</option>
+                @endforeach
             </select>
         </div>
     </div>

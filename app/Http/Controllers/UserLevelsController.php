@@ -2,53 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserLevel;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class UserLevelsController extends Controller
 {
     public function index(Request $request): View
     {
-        $users = User::query()->orderBy('user_name')->get();
+        $allLevels = UserLevel::query()->orderBy('level_name')->get();
 
         return View(
-            'users.index',
-            compact('users')
+            'users/levels.index',
+            compact('allLevels')
         );
     }
 
-    public function create(Department $department, Office $office): View
+    public function create(): View
     {
-        $departments = $department->all();
-        $offices = $office->all();
         return View(
-            'users.create',
-            compact('departments', 'offices')
+            'users/levels.create'
         );
     }
 
     public function store(Request $request): RedirectResponse
     {
-        $data = $request->except(['user_photo', '_token']);
-        $data['password'] = Hash::make($data['password']);
+        $data = $request->all();
+        UserLevel::create($data);
 
-        $user = User::create($data);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return Redirect::route('users.index');
+        return Redirect::route('levels.index');
     }
 
-
-    public function edit(Office $office, Department $department, User $user): View
+    public function edit(UserLevel $level): View
     {
-        $offices = Office::query()->orderBy('job_name')->get();
-        $departments = Department::query()->orderBy('department_name')->get();
-
         return view(
-            'users.edit',
-            compact('departments', 'offices')
-        )->with('user', $user);
+            'users/levels.edit'
+        )->with('level', $level);
+    }
+
+    public function destroy(UserLevel $level): RedirectResponse
+    {
+        $level->delete();
+
+        return Redirect::route('levels.index')->with(
+            'mensagem.sucesso',
+            "Nível '{$level->level_name}' foi removido com sucesso"
+        );
     }
 }
